@@ -1,0 +1,6 @@
+# Metafiles
+.cache
+.idea
+
+# Generated
+dist
