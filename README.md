@@ -9,20 +9,17 @@ Run this command in the terminal to install dependencies :
 ```
 yarn
 ```
-
-Compile the code
+Compile the code with a local server (during dev).
 ```
 yarn dev
 ```
-
-Compile the code with a local server
-```
-yarn watch
-```
-
-Compile the code for prod
+Compile the code for production.
 ```
 yarn prod
+```
+Clean generated "dist" folder.
+```
+yarn clean
 ```
 
 ## Follow me
