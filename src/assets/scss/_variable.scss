@@ -1,0 +1,31 @@
+// Font family
+$ff_source: "Source Sans Pro", sans-serif;
+
+$ff_default: $ff_source;
+
+// Font size
+$fz_default: 1.4rem;
+
+// Color - base
+$c_yellow_light: #F1E7D6;
+$c_purple: #53505C;
+
+// Color - context
+$c_default_main: $c_purple;
+
+// Bg - context
+$bg_first_scene: $c_yellow_light;
+$bg_selected: $c_yellow_light;
+
+// Outline - context
+$outline_default: $c_yellow_light;
+
+// Media queries
+$max_xxl: "1800px";
+$max_xl: "1400px";
+$max_l: "1200px";
+$max_m: "992px";
+$max_s: "768px";
+$max_xs: "576px";
+
+$w_container: 480px;

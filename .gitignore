@@ -12,3 +12,4 @@ Thumbs.db
 # Generated
 dist
 node_modules
+yarn-error.log

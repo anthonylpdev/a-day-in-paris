@@ -1,10 +1,19 @@
 @import "../../../node_modules/reset-css/sass/reset";
+@import 'variable';
 @import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@200;300;400&family=Suranna&display=swap");
 html {
   font-size: 62.5%;
   body {
-    font-family: "Source Sans Pro", sans-serif;
-    font-size: 1.4rem;
+    font-family: $ff_default;
+    font-size: $fz_default;
+    * {
+      &:focus, &:active {
+        outline-color: $outline_default;
+      }
+      &::selection {
+        background-color: $bg_selected;
+      }
+    }
     button {
       background: none;
       border: none;
@@ -17,7 +26,7 @@ html {
       background: rgb(242,236,225);
       background: radial-gradient(circle, rgba(242,236,225,1) 0%, rgba(241,231,214,1) 100%);
       .container {
-        width: 480px;
+        width: $w_container;
         margin: 0 auto;
       }
       section{
@@ -25,7 +34,7 @@ html {
         flex-direction: column;
         justify-content: space-between;
         height: 791px;
-        background-color: #F1E7D6;
+        background-color: $bg_first_scene;
         box-shadow: 0 19px 48px rgba(0, 0, 0, 0.22), 0 15px 32px rgba(0, 0, 0, 0.15);
         ul {
           display: block;
@@ -44,9 +53,11 @@ html {
             font-size: 4.8rem;
             align-items: center;
             text-transform: uppercase;
-            color: #53505C;
+            color: $c_default_main;
             &:not(:first-child){
-              display: none;
+              > div {
+                opacity: 0;
+              }
             }
           }
         }
@@ -70,7 +81,7 @@ html {
           align-self: center;
           padding: 12px 52px;
           border-radius: 20px;
-          background: #53505C;
+          background: $c_default_main;
           font-style: normal;
           font-weight: normal;
           font-size: 1.4rem;
@@ -79,6 +90,9 @@ html {
           text-align: center;
           text-transform: uppercase;
           color: #FFFFFF;
+          &:hover {
+            cursor: pointer;
+          }
         }
       }
     }
