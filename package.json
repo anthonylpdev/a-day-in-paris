@@ -1,0 +1,22 @@
+{
+  "name": "a-day-in-paris",
+  "version": "1.0.0",
+  "description": "Little animated scene with animated SVG.",
+  "main": "index.js",
+  "keywords": [],
+  "author": "Anthony LOPEZ <https://twitter.com/anthonylpdev>",
+  "license": "MIT",
+  "scripts": {
+    "clean": "rm dist/bundle.js",
+    "dev": "parcel src/index.html",
+    "prod": "parcel build src/index.html"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.12.7",
+    "@babel/preset-env": "^7.12.7",
+    "gsap": "^3.5.1",
+    "parcel-bundler": "^1.12.4",
+    "reset-css": "^5.0.1",
+    "sass": "^1.29.0"
+  }
+}
