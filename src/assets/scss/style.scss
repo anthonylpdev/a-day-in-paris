@@ -1,5 +1,5 @@
 @import "../../../node_modules/reset-css/sass/reset";
-@import 'variable';
+@import "variable";
 @import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@200;300;400&family=Suranna&display=swap");
 html {
   font-size: 62.5%;
@@ -17,25 +17,32 @@ html {
     button {
       background: none;
       border: none;
+      transition: opacity .4s ease-in-out;
+      &:disabled {
+        opacity: 0.2;
+      }
     }
     main {
       height: 100vh;
       display: flex;
       flex-direction: column;
       justify-content: center;
-      background: rgb(242,236,225);
-      background: radial-gradient(circle, rgba(242,236,225,1) 0%, rgba(241,231,214,1) 100%);
+      transition: background-color .8s ease-in-out;
+      // background: rgb(242, 236, 225);
+      // background: radial-gradient(circle, rgba(242, 236, 225, 1) 0%, rgba(241, 231, 214, 1) 100%);
+      background-color: $bg_first_scene;
       .container {
         width: $w_container;
         margin: 0 auto;
       }
-      section{
+      section {
         display: flex;
         flex-direction: column;
         justify-content: space-between;
         height: 791px;
         background-color: $bg_first_scene;
         box-shadow: 0 19px 48px rgba(0, 0, 0, 0.22), 0 15px 32px rgba(0, 0, 0, 0.15);
+        transition: background-color .4s ease-in-out;
         ul {
           display: block;
           position: relative;
@@ -53,15 +60,21 @@ html {
             font-size: 4.8rem;
             align-items: center;
             text-transform: uppercase;
-            color: $c_default_main;
-            &:not(:first-child){
+            color: #416587;
+            &:not(:first-child) {
               > div {
                 opacity: 0;
               }
             }
+            &:first-child {
+              color: $c_default_main;
+            }
+            &:last-child {
+              color: #E5E5E5;
+            }
           }
         }
-        .deco-part  {
+        .deco-part {
           display: flex;
           flex-direction: column;
           justify-content: flex-end;
@@ -69,8 +82,11 @@ html {
           padding-bottom: 37px;
           svg {
             .deco-custom {
-              &:not(:first-child){
-                display: none;
+              // display: none; // laaaaaaa
+              &:not(:first-child) {
+                circle, path {
+                  opacity: 0;
+                }
               }
             }
           }
@@ -92,6 +108,49 @@ html {
           color: #FFFFFF;
           &:hover {
             cursor: pointer;
+          }
+          &:focus {
+            outline: none;
+          }
+        }
+      }
+      .first-level, .third-level {
+        fill: #A4907C;
+      }
+      .second-level {
+        fill: #53505C;
+      }
+      &.day {
+        background-color: #DAEAF9;
+        // background: rgb(218,234,249);
+        // background: radial-gradient(circle, rgba(218,234,249,1) 0%, rgba(236,242,247,1) 100%);
+        section {
+          background-color: #daeaf9;
+          button {
+            background-color: #4B6076;
+          }
+          .first-level, .third-level {
+            fill: #4B6076;
+          }
+          .second-level {
+            fill: #899FB7;
+          }
+        }
+      }
+      &.night {
+        background-color: #4B6076;
+        // background: rgb(75,96,118);
+        // background: radial-gradient(circle, rgba(75,96,118,1) 0%, rgba(97,125,154,1) 100%);
+        section {
+          background-color: #4b6076;
+          button {
+            background-color: #778496;
+          }
+          .first-level, .third-level {
+            fill: #2F4253;
+          }
+          .second-level {
+            fill: #778496;
           }
         }
       }
