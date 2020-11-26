@@ -1,21 +1,44 @@
 // Font family
 $ff_source: "Source Sans Pro", sans-serif;
+$ff_suranna: "Suranna", serif;
 
 $ff_default: $ff_source;
+$ff_title: $ff_suranna;
 
 // Font size
 $fz_default: 1.4rem;
 
 // Color - base
+$c_yellow: #A4907C;
 $c_yellow_light: #F1E7D6;
 $c_purple: #53505C;
+$c_blue_lightest: #DAEAF9;
+$c_blue_light: #899FB7;
+$c_blue_base: #778496;
+$c_blue_dark: #4B6076;
+$c_blue_darkest: #2F4253;
+$c_grey: #E5E5E5;
+$c_white: #FFFFFF;
 
 // Color - context
-$c_default_main: $c_purple;
+$c_btn: $c_white;
 
 // Bg - context
-$bg_first_scene: $c_yellow_light;
 $bg_selected: $c_yellow_light;
+
+// Scenes
+$first_scene_bg: $c_yellow_light;
+$first_scene_main: $c_yellow;
+$first_scene_second: $c_purple;
+
+$second_scene_bg: $c_blue_lightest;
+$second_scene_main: $c_blue_dark;
+$second_scene_second: $c_blue_light;
+
+$third_scene_bg: $c_blue_dark;
+$third_scene_main: $c_blue_darkest;
+$third_scene_second: $c_blue_base;
+$third_scene_title: $c_grey;
 
 // Outline - context
 $outline_default: $c_yellow_light;

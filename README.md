@@ -22,6 +22,11 @@ Clean generated "dist" folder.
 yarn clean
 ```
 
+## Next steps
+* responsive optimisation
+* parallax effect on touch devices based on device orientation
+* loader between scene transition
+
 ## Follow me
 
 Accounts : [Twitter](https://twitter.com/anthonylpdev), [Github](https://github.com/anthonylpdev)
