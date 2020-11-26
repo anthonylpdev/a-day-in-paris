@@ -1,56 +1,69 @@
 @import "../../../node_modules/reset-css/sass/reset";
+@import "variable";
 @import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@200;300;400&family=Suranna&display=swap");
 html {
   font-size: 62.5%;
   body {
-    font-family: "Source Sans Pro", sans-serif;
-    font-size: 1.4rem;
-    button {
-      background: none;
-      border: none;
+    font-family: $ff_default;
+    font-size: $fz_default;
+    * {
+      &:focus, &:active {
+        outline-color: $outline_default;
+      }
+      &::selection {
+        background-color: $bg_selected;
+      }
     }
     main {
       height: 100vh;
       display: flex;
       flex-direction: column;
       justify-content: center;
-      background: rgb(242,236,225);
-      background: radial-gradient(circle, rgba(242,236,225,1) 0%, rgba(241,231,214,1) 100%);
+      transition: background-color .8s ease-in-out;
+      background-color: $first_scene_bg;
       .container {
-        width: 480px;
+        width: $w_container;
         margin: 0 auto;
       }
-      section{
+      section {
         display: flex;
         flex-direction: column;
         justify-content: space-between;
         height: 791px;
-        background-color: #F1E7D6;
+        background-color: $first_scene_bg;
         box-shadow: 0 19px 48px rgba(0, 0, 0, 0.22), 0 15px 32px rgba(0, 0, 0, 0.15);
+        transition: background-color .4s ease-in-out;
         ul {
           display: block;
           position: relative;
           height: 48px;
-          margin-top: 118px;
           li {
             width: 100%;
             text-align: center;
             position: absolute;
-            top: 0;
+            top: 110px;
             left: 0;
-            font-family: "Suranna", serif;
+            font-family: $ff_title;
             font-style: normal;
             font-weight: 100;
             font-size: 4.8rem;
             align-items: center;
             text-transform: uppercase;
-            color: #53505C;
-            &:not(:first-child){
-              display: none;
+            color: $second_scene_main;
+            &:not(:first-child) {
+              > div {
+                opacity: 0;
+              }
+            }
+            &:first-child {
+              color: $first_scene_second;
+            }
+            &:last-child {
+              color: $third_scene_title;
             }
           }
         }
-        .deco-part  {
+        .deco-part {
           display: flex;
           flex-direction: column;
           justify-content: flex-end;
@@ -58,8 +71,10 @@ html {
           padding-bottom: 37px;
           svg {
             .deco-custom {
-              &:not(:first-child){
-                display: none;
+              &:not(:first-child) {
+                circle, path {
+                  opacity: 0;
+                }
               }
             }
           }
@@ -70,7 +85,7 @@ html {
           align-self: center;
           padding: 12px 52px;
           border-radius: 20px;
-          background: #53505C;
+          background: $first_scene_second;
           font-style: normal;
           font-weight: normal;
           font-size: 1.4rem;
@@ -78,7 +93,56 @@ html {
           align-items: center;
           text-align: center;
           text-transform: uppercase;
-          color: #FFFFFF;
+          color: $c_btn;
+          transition: opacity .4s ease-in-out;
+          border: none;
+          &:hover {
+            cursor: pointer;
+            opacity: 0.8;
+          }
+          &:disabled {
+            opacity: 0.2;
+            cursor: not-allowed;
+          }
+          &:focus {
+            outline: none;
+          }
+        }
+      }
+      .first-level, .third-level {
+        fill: $first_scene_main;
+      }
+      .second-level {
+        fill: $first_scene_second;
+      }
+      &.day {
+        background-color: $second_scene_bg;
+        section {
+          background-color: $second_scene_bg;
+          button {
+            background-color: $second_scene_main;
+          }
+          .first-level, .third-level {
+            fill: $second_scene_main;
+          }
+          .second-level {
+            fill: $second_scene_second;
+          }
+        }
+      }
+      &.night {
+        background-color: $third_scene_bg;
+        section {
+          background-color: $third_scene_bg;
+          button {
+            background-color: $third_scene_second;
+          }
+          .first-level, .third-level {
+            fill: $third_scene_main;
+          }
+          .second-level {
+            fill: $third_scene_second;
+          }
         }
       }
     }
