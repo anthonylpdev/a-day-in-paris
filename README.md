@@ -24,6 +24,7 @@ yarn clean
 
 ## Next steps
 * responsive optimisation
+* add loader
 * parallax effect on touch devices based on device orientation
 * loader between scene transition
 
