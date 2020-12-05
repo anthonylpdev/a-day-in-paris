@@ -1,127 +1,190 @@
-import '../scss/style.scss';
-import gsap  from 'gsap/all'
-import {SplitText} from 'gsap/SplitText';
+import '../scss/style.scss'
+import gsap from 'gsap/all'
+import { SplitText } from 'gsap/SplitText'
 
-gsap.registerPlugin(SplitText);
+gsap.registerPlugin(SplitText)
 
+/**
+ * Base App class.
+ *
+ * @class Base
+ */
 class Base {
+  /**
+   * Creates an instance of Base.
+   * @memberof Base
+   */
   constructor() {
-    this.setup();
-    this.listener();
-    this.raf();
+    this.onMouseMove = this.onMouseMove.bind(this)
+    this.onRaf = this.onRaf.bind(this)
+    this.setup()
+    this.listener()
+    this.onRaf()
   }
+
+  /**
+   * Setup data and values.
+   * @memberof Base
+   */
   setup() {
     this.isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-        navigator.userAgent);
-    this.mouse = {x: 0, y: 0};
-    this.svgSelector = document.querySelector('svg');
-    this.currentScene = 0;
-    this.svgInfos = this.svgSelector.getBoundingClientRect();
+      navigator.userAgent
+    )
+    this.mouse = { x: 0, y: 0 }
+    this.currentScene = 0
+    this.svgInfos = document.querySelector('svg').getBoundingClientRect()
 
-    this.elList = gsap.utils.toArray('.parallax-el');
-    this.isMoving = false;
-    this.variationSelector = document.querySelector('#variation');
+    this.mainEl = document.querySelector('main')
+    this.variationEl = document.querySelector('#variation')
+    this.paralaxItems = [...document.querySelectorAll('.parallax-el')]
+    this.isMoving = false
 
-    this.titles = document.querySelectorAll('.moment-title');
-    this.splited = [];
-    this.titles.forEach((el) => {
-      this.splited.push(new SplitText(el, {type:"chars"}));
-    });
+    this.titleItems = [...document.querySelectorAll('.moment__title')]
+    this.splited = this.titleItems.map(
+      el => new SplitText(el, { type: 'chars' })
+    )
 
     // Parcel hot module replacement (HMR)
     if (module.hot) {
-      module.hot.accept();
+      module.hot.accept()
     }
-
   }
+
+  /**
+   * Add event listeners.
+   * @memberof Base
+   */
   listener() {
     if (!this.isMobile) {
-      window.addEventListener('mousemove', (event) => {
-        this.onMouseMove(event, this);
-      }, false);
+      window.addEventListener('mousemove', this.onMouseMove)
     }
 
-    document.querySelector('#switch').addEventListener('click', (event)  => {
-      event.preventDefault();
-      event.target.disabled = true;
-      let nextScene = this.currentScene >= this.splited.length - 1 ? 0 : this.currentScene + 1;
+    document.querySelector('.switch').addEventListener('click', event => {
+      event.preventDefault()
+      event.target.disabled = true
 
-      this.transitionAnim(event, this.currentScene, nextScene);
-      this.currentScene = nextScene;
-    });
+      const nextScene =
+        this.currentScene >= this.splited.length - 1 ? 0 : this.currentScene + 1
 
+      this.transitionAnim(event, this.currentScene, nextScene)
+      this.currentScene = nextScene
+    })
   }
+
+  /**
+   * Time animation.
+   * @param {MouseEvent} event
+   * @param {number} current
+   * @param {number} next
+   * @memberof Base
+   */
   transitionAnim(event, current, next) {
-    let mainSelector = document.querySelector('main');
-    let titleSelector = document.querySelectorAll('.moment-title');
-    let oldClass = titleSelector[current].getAttribute('data-slug');
-    let newClass = titleSelector[next].getAttribute('data-slug');
+    const oldClass = this.titleItems[current].dataset.slug
+    const newClass = this.titleItems[next].dataset.slug
 
-    gsap.timeline()
-    .addLabel('begin')
-    .to(this.splited[current].chars, {
-      opacity: 0,
-      y: -40,
-      stagger: 0.05,
-      ease: "expo.in"
-    }, 'begin')
-    .to(this.variationSelector.children[current].children, {
-      opacity: 0,
-      y: -40,
-      stagger: 0.05,
-      ease: "expo.in",
-      onComplete: () => {
-        mainSelector.classList.replace(oldClass, newClass);
-      }
-    }, 'begin')
-    .fromTo(this.splited[next].chars, {
-      opacity: 0,
-      y: 40,
-      stagger: 0.1,
-      ease: "expo.in"
-    },{
-      opacity: 1,
-      y: 0,
-      stagger: 0.1,
-      ease: "expo.out"
-    })
-    .fromTo(this.variationSelector.children[next].children, {
-      opacity: 0,
-      y: 40,
-      stagger: 0.05,
-      ease: "expo.out"
-    }, {
-      opacity: 1,
-      y: 0,
-      stagger: 0.05,
-      duration: 2,
-      ease: "expo.out",
-      onComplete: () => {
-        event.target.disabled = false;
-      }
-    })
-    .play();
+    gsap
+      .timeline()
+      .addLabel('begin')
+      .to(
+        this.splited[current].chars,
+        {
+          opacity: 0,
+          y: -40,
+          stagger: 0.05,
+          ease: 'expo.in',
+        },
+        'begin'
+      )
+      .to(
+        this.variationEl.children[current].children,
+        {
+          opacity: 0,
+          y: -40,
+          stagger: 0.05,
+          ease: 'expo.in',
+          onComplete: () => {
+            this.mainEl.classList.replace(oldClass, newClass)
+          },
+        },
+        'begin'
+      )
+      .fromTo(
+        this.splited[next].chars,
+        {
+          opacity: 0,
+          y: 40,
+          stagger: 0.1,
+          ease: 'expo.in',
+        },
+        {
+          opacity: 1,
+          y: 0,
+          stagger: 0.1,
+          ease: 'expo.out',
+        }
+      )
+      .fromTo(
+        this.variationEl.children[next].children,
+        {
+          opacity: 0,
+          y: 40,
+          stagger: 0.05,
+          ease: 'expo.out',
+        },
+        {
+          opacity: 1,
+          y: 0,
+          stagger: 0.05,
+          duration: 2,
+          ease: 'expo.out',
+          onComplete: () => {
+            event.target.disabled = false
+          },
+        }
+      )
+      .play()
   }
-  raf() {
-    this.parallax(this.elList, 100);
-    requestAnimationFrame(this.raf.bind(this));
+
+  /**
+   * On RAF event.
+   * @memberof Base
+   */
+  onRaf() {
+    this.parallax()
+    requestAnimationFrame(this.onRaf)
   }
-  onMouseMove(event, that) {
-    this.isMoving = true;
-    that.mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
-    that.mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+
+  /**
+   * On Mouse Move event.
+   * @param {MouseEvent} event
+   * @memberof Base
+   */
+  onMouseMove(event) {
+    this.isMoving = true
+    this.mouse.x = (event.clientX / window.innerWidth) * 2 - 1 // eslint-disable-line no-mixed-operators
+    this.mouse.y = -(event.clientY / window.innerHeight) * 2 + 1 // eslint-disable-line no-mixed-operators
   }
-  parallax(target, speed) {
+
+  /**
+   * Parallax move.
+   * @memberof Base
+   */
+  parallax() {
     if (this.isMoving) {
-      target.forEach((el, index) => {
-        gsap.to(el, {
-          x: this.svgInfos.width * this.mouse.x * (index + 1.2) / speed,
-          y: this.svgInfos.height * this.mouse.y * (index + 1.2) / speed,
-        }).play();
-      });
-      this.isMoving = false;
+      const speed = 100
+
+      this.paralaxItems.forEach((el, index) => {
+        gsap
+          .to(el, {
+            x: (this.svgInfos.width * this.mouse.x * (index + 1.2)) / speed,
+            y: (this.svgInfos.height * this.mouse.y * (index + 1.2)) / speed,
+          })
+          .play()
+      })
+      this.isMoving = false
     }
   }
 }
 
-new Base();
+// eslint-disable-next-line no-new
+new Base()
