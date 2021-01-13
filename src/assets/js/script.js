@@ -24,7 +24,7 @@ class Base {
   }
 
   logMessage() {
-    console.log('%cYou shall not pass ! 🧙%c\n%c...but you can follow me on Twitter => %c@anthonylpdev', 'background-color:#15202b;padding:6px;' , '', 'background-color:#15202b;padding:6px;', 'color:#1da1f2;background-color:#15202b;padding:6px;');
+    console.log('%cYou shall not pass ! 🧙%c\n%c...but you can follow me on Twitter => https://twitter.com/anthonylpdev', 'background-color:#15202b;padding:6px;' , '', 'background-color:#15202b;padding:6px;');
   }
 
   /**
